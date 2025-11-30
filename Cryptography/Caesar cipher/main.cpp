@@ -26,6 +26,25 @@ Features:
 3. Keyspace limited to alphabet used
 */ 
 
+/*
+First solution idea:
+1. Take plaintext input -> store as string
+2. Take shift number input -> store as int
+3. Compare char's in plaintext with the Hash Map -> return array of integers
+4. Shift array int's based on the shift number
+5. Turn int's into string
+6. Return shifted string
+
+Hash map with the alphabet
+    Create the hash map: unordered_map<string, int> umap;
+    Insert key pairs into the hash map
+        umap["A"] = 1;
+        umap["B"] = 2;
+        ...
+        umap["Z"] = 26;
+
+*/
+
 #include <iostream>
 
 void getInput(){
@@ -37,7 +56,7 @@ int main () {
     std::string plaintext;
     std::cout << "Enter plaintext: ";
     std::cin >> plaintext;
-    std::cout << ;
+    std::cout << plaintext;
     //input: shift
     //output: ciphertext
 }
