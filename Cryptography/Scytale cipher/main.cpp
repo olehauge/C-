@@ -37,17 +37,8 @@ int main () {
     std::string plaintext = "PLAINTEXTMESSAGE";
     char ciphertext[plaintext.length()];
 
-    for (int i = 0; i < plaintext.length(); ++i) { // i = 16
-        if (i % key == 0) {
-            ciphertext[x] = plaintext[i]; // x is 0-3 0 4 8 12
-        } else if (i % key == 1) {
-            ciphertext[x] = plaintext[i]; // x is 4-7 1 5 9 13
-        } else if (i % key == 2) {
-            ciphertext[x] = plaintext[i]; // x is 8-11 2 6 10 14
-        } else if (i % key == 3) {
-            int x = i / key; 
-            ciphertext[x] = plaintext[i]; // x is 12-15 3 7 11 15
-        }
+    for (char c : plaintext) { 
+        
     }
     // get cipher key 
 
