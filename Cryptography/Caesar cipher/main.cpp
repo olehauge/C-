@@ -78,6 +78,9 @@ Clean the input:
     
     std::toupper
     std::isupper
+
+How was space handled? 
+if space leave it. 
 */
 
 #include <iostream>
@@ -89,10 +92,9 @@ std::string capitalizeInput(){
     //input: plaintext
     std::string plaintext;
     std::cout << "Enter plaintext: ";
-    std::cin >> plaintext;
+    std::getline(std::cin, plaintext);
     std::transform(plaintext.begin(), plaintext.end(), plaintext.begin(),
                    [](unsigned char c){ return std::toupper(c); });
-    
     return plaintext;
 }
 
@@ -100,16 +102,50 @@ std::string encrypt (std::string plaintext, int shift_number, int lower, int upp
     std::string ciphertext; 
 
     for (char c : plaintext) {
-        int shifted_ASCII = c + shift_number;
-        int cipher_number = lower + (shifted_ASCII - lower) % (upper - lower + 1);    
-        char cipher_char = static_cast<char>(cipher_number); 
-        ciphertext += cipher_char;
+        if (c == ' '){
+            ciphertext += ' ';
+        } else {
+            int shifted_ASCII = c + shift_number;
+            int cipher_number = lower + (shifted_ASCII - lower) % (upper - lower + 1);    
+            char cipher_char = static_cast<char>(cipher_number); 
+            ciphertext += cipher_char;
+        }
     }
     return ciphertext;
 }
 
+std::string decrypt (std::string ciphertext, int shift_number, int lower, int upper){
+    std::string plaintext;
+
+    for (char c : ciphertext) {
+        if (c == ' ') {
+            plaintext += ' ';
+        } else {
+            int shifted_ASCII = c - shift_number;
+            int plain_number = lower + (shifted_ASCII - lower) % (upper - lower + 1);
+            char plain_char = static_cast<char>(plain_number);
+            plaintext += plain_char;
+        }
+    }
+    return plaintext;
+}
 
 int main () {
+    int program_mode;
+    std::cout << "Caesar cipher--choose 1 for encryption or 2 for decryption: ";
+    std::cin >> program_mode;
+    
+    if (program_mode == 1) { // encrypt
+        int shift_number; 
+        
+    }
+    else if (program_mode == 2) { // decrypt
+
+    }
+    else {
+        std::cout << "Not a valid option.";
+    }
+
     std::string plaintext = capitalizeInput();
 
     int shift_number;
@@ -123,6 +159,9 @@ int main () {
     // encrypt the plaintext 
     std::string ciphertext = encrypt(plaintext, shift_number, lower, upper);
     std::cout << "Your ciphertext: " << ciphertext << std::endl;
+
+    std::cout << "The decrypted message: " << decrypt(ciphertext, shift_number, lower, upper) << std::endl;
+
 
 
 }
