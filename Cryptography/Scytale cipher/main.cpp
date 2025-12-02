@@ -31,6 +31,11 @@ Decryption:
 #include <cstring>
 
 int main () {
+  /*
+  1. Define a key
+  2. Create a matrix
+  3. Determine column direction
+  */
     // plaintext
     // get plaintext
     int key = 4;
@@ -40,5 +45,5 @@ int main () {
     for (char c : plaintext) { 
         
     }
-    
+
 }
