@@ -40,13 +40,5 @@ int main () {
     for (char c : plaintext) { 
         
     }
-    // get cipher key 
-
-    // encrypt
-    // split plaintext into 'n' rows
-
-    // ciphertext 
-
-    // decrypt
-
+    
 }
