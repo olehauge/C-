@@ -33,32 +33,23 @@ Decryption:
 
 int main () {
   /*
-  Encryption process: 
-  1. Define a key
-  2. Create a matrix
-  3. Determine column direction
-  4. Read columns
 
   Decryption process: 
   1. Reconstruct matrix
   2. Determin column order
   3. Fill matrix
   4. Read rows
-
-  C++ implementation considerations: 
-  1. String opertations: std::string -> length(), operator[]
-  2. Matrix representaiton: std::vector<std::vector<char>>
-  3. Key ordering: std::map
-  4. Padding 
   */
   
-  // Encryption
-  std::string plaintext = "PLAINTEXTMESSAGE";
-  std::cin >> plaintext;
+  // Encryption process
+  std::string plaintext;
+  std::cout << "Enter plaintext: ";
+  std::getline(std::cin, plaintext);
   std::string ciphertext;
   int row = 4; //key + turn into input
   int column = (plaintext.length() / row); //Scytale cipher uses the diameter (rows) as the key i.e, the rows and plaintext length determine the column number
   std::vector<std::vector<char>> matrix(row, std::vector<char>(column, ' ')); // Declare matrix initiated by ' '. 
+  
   /*
   PLAINTEXT = PLAINTEXTMESSAGE
   KEY = 4 (ROWS)
@@ -85,4 +76,24 @@ int main () {
     }
   }
   std::cout << std::endl << "Ciphertext: " << ciphertext << std::endl;
+
+  // Decryption process
+  std::vector<std::vector<char>> decrypt_matrix(row, std::vector<char>(column, ' ')); // Declare matrix initiated by ' '. 
+  int decrypt_counter = 0;
+
+  for (int i = 0; i < column; ++i) {
+    for (int j = 0; j < row; ++j) {
+      decrypt_matrix[i][j] = ciphertext[decrypt_counter]; 
+      std::cout << decrypt_matrix[i][j] << " ";
+      ++decrypt_counter;
+    }
+    std::cout << std::endl;
+  }
+  std::string decrypted_text;
+  for (int i = 0; i < column; ++i) {
+    for (int j = 0; j < row; ++j) {
+      decrypted_text += decrypt_matrix[j][i];
+    }
+  }
+  std::cout << std::endl << "Decrypted message: " << decrypted_text << std::endl;
 }
