@@ -53,12 +53,6 @@ Thus, after encryption, we get "iuptnqvo".
 
 */
 
-/*
-Ideas:
-Letter   A   B ... Y   Z
-(h.v)   1.1 2.1   4.5 5.5
-*/
-
 #include <iostream>
 #include <unordered_map>
 #include <algorithm> 
@@ -104,7 +98,7 @@ int main() {
   for (char c : plaintext) {
     primary_cipher+= polybus_square[c];
   } 
-
+  
   // Advanced encryption version (step. 1)
   std::string secondary_cipher;
   std::string secondary_cipher_rigth;
@@ -137,4 +131,34 @@ int main() {
   }
   std::cout << "Plaintext message: " << plaintext << std::endl;
   std::cout << "Encrypted message: " << final_ciphertext << std::endl;
+
+  std::string decoded_message;
+  for (char c : final_ciphertext) {
+    decoded_message += polybus_square[c];
+  }
+
+  std::string decoded_message_step2;
+  for (int i = 0; i < decoded_message.length(); ++i) {
+    decoded_message_step2 += decoded_message[((i-1)%secondary_cipher.length())];
+  }
+
+  std::string decoded_message_step3;
+  std::string horizontal;
+  std::string vertical;
+  for (int i = 0; i < (decoded_message_step2.length()/2); ++i) {
+    decoded_message_step3 += decoded_message_step2[i];
+    decoded_message_step3 += decoded_message_step2[i+(decoded_message_step2.length()/2)];
+  }
+
+  std::string final_decoded_message;
+  for (int i = 0; i < decoded_message_step3.length(); ++i) {
+    std::string value; 
+    if (i % 2 == 0) {
+      value = decoded_message_step3[i];
+      value += decoded_message_step3[i+1];
+      final_decoded_message += polybus_square_reverse[value];
+    }
+  }
+
+  std::cout << "Decoded message: " << final_decoded_message << std::endl;
 }
