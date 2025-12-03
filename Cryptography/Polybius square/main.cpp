@@ -98,7 +98,7 @@ int main() {
   for (char c : plaintext) {
     primary_cipher+= polybus_square[c];
   } 
-  
+
   // Advanced encryption version (step. 1)
   std::string secondary_cipher;
   std::string secondary_cipher_rigth;
@@ -160,5 +160,5 @@ int main() {
     }
   }
 
-  std::cout << "Decoded message: " << final_decoded_message << std::endl;
+  std::cout << "Decrypted message: " << final_decoded_message << std::endl;
 }
